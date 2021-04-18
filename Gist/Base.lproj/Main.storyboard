@@ -16,23 +16,12 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="scannerView" customClass="ScannerView" customModule="Gist" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Y6l-XL-PgY" userLabel="scanButton">
-                                <rect key="frame" x="184" y="790" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="scanButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T2c-Cr-vmK"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="scanButton" destination="Y6l-XL-PgY" id="zmE-HR-8Eq"/>
                         <outlet property="scannerView" destination="8bC-Xf-vdC" id="cdH-vi-aqo"/>
-                        <segue destination="y7f-MW-Ihs" kind="show" identifier="detailSegue" destinationCreationSelector="detailSegue" id="4UG-KE-yNH"/>
+                        <segue destination="1lN-YQ-3ab" kind="presentation" identifier="detailSegue" modalPresentationStyle="fullScreen" id="ldN-6E-dko"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -47,8 +36,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VHk-Jr-8Yp">
-                                <rect key="frame" x="69.5" y="211" width="275" height="403.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VHk-Jr-8Yp">
+                                <rect key="frame" x="69.5" y="219.5" width="275" height="403.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuC-G8-hJp" userLabel="detailLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="20.5"/>
@@ -72,7 +61,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nea-r0-Lp7">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nea-r0-Lp7">
                                         <rect key="frame" x="0.0" y="373.5" width="275" height="30"/>
                                         <state key="normal" title="Send Comment"/>
                                         <connections>
@@ -80,6 +69,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="403.5" id="buJ-W1-adq"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hme-pY-dmk"/>
@@ -99,13 +91,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2M-k5-fw4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="70"/>
+            <point key="canvasLocation" x="1443" y="70"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="7Mu-LM-C8h">
             <objects>
-                <tableViewController id="1lN-YQ-3ab" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4tm-bs-HOb">
+                <tableViewController id="1lN-YQ-3ab" customClass="TableViewController" customModule="Gist" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="top" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4tm-bs-HOb" userLabel="tableView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -124,10 +116,19 @@
                             <outlet property="delegate" destination="1lN-YQ-3ab" id="f3Y-zg-1DH"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Add a new Comment" width="42" id="rdw-SS-wb8">
+                            <connections>
+                                <segue destination="y7f-MW-Ihs" kind="presentation" identifier="submitSegue" id="HWh-D5-6mK"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="c2h-1U-0Hf"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtj-uu-iyr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="781" y="-334"/>
+            <point key="canvasLocation" x="601" y="70"/>
         </scene>
     </scenes>
     <resources>

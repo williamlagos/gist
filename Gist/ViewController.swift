@@ -20,11 +20,11 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var scanButton: UIButton! {
-        didSet {
-            scanButton.setTitle("STOP", for: .normal)
-        }
-    }
+//    @IBOutlet weak var scanButton: UIButton! {
+//        didSet {
+//            scanButton.setTitle("STOP", for: .normal)
+//        }
+//    }
     
     var qrData: QRData? = nil {
         didSet {
@@ -64,8 +64,8 @@ class ViewController: UIViewController {
 extension ViewController : ScannerViewDelegate {
     
     func scanningDidStop() {
-        let buttonTitle = scannerView.isRunning ? "STOP" : "SCAN"
-        scanButton.setTitle(buttonTitle, for: .normal)
+//        let buttonTitle = scannerView.isRunning ? "STOP" : "SCAN"
+//        scanButton.setTitle(buttonTitle, for: .normal)
     }
     
     func scanningDidFail() {
@@ -74,6 +74,7 @@ extension ViewController : ScannerViewDelegate {
     
     func scanningSucceededWithCode(_ str: String?) {
         self.qrData = QRData(codeString: str)
+        performSegue(withIdentifier: "detailSegue", sender: nil)
     }
     
 }

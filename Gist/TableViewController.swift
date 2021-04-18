@@ -93,7 +93,7 @@ class TableViewController : UITableViewController {
 extension TableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "submitSegue", let viewController = segue.destination as? DetailViewController {
+        if segue.identifier == "submitSegue", let viewController = segue.destination as? EditViewController {
             viewController.gistID = self.gistID
         }
     }

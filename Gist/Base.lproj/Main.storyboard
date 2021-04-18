@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Gist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main" id="BYZ-38-t0r" customClass="MainViewController" customModule="Gist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="scannerView" customClass="ScannerView" customModule="Gist" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="-197" y="70"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Gist Comment-->
         <scene sceneID="IgS-bE-miI">
             <objects>
-                <viewController id="y7f-MW-Ihs" customClass="DetailViewController" customModule="Gist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Gist Comment" id="y7f-MW-Ihs" customClass="EditViewController" customModule="Gist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XVT-rV-Klz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

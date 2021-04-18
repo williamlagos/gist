@@ -46,11 +46,10 @@ class DetailViewController : UIViewController {
                 self.handleServerError(response: response!)
                 return
             }
-            if let mimeType = httpResponse.mimeType, mimeType == "text/html",
+            /*if let mimeType = httpResponse.mimeType, mimeType == "text/html",
                 let data = data,
                 let string = String(data: data, encoding: .utf8) {
-                print(string)
-            }
+            }*/
         }
         task.resume()
     }

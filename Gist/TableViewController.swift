@@ -23,6 +23,7 @@ class TableViewController : UITableViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.navigationController?.setToolbarHidden(true, animated:true)
         
     }
     

@@ -10,13 +10,16 @@ import Foundation
 class DetailViewController : UIViewController {
     
     @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var comments: UITableView!
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var accessToken: UITextField!
     var gistID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        comment.layer.cornerRadius = 5
+        comment.layer.borderColor = UIColor.blue.cgColor
+        comment.layer.borderWidth = 1
     }
     
     @IBAction func sendComment(_ sender: Any) {

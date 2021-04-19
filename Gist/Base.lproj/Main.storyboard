@@ -12,16 +12,62 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Gist" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ScannerView" customModule="Gist" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="scannerView" customClass="ScannerView" customModule="Gist" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Y6l-XL-PgY" userLabel="scanButton">
+                                <rect key="frame" x="184" y="790" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="scanButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T2c-Cr-vmK"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="scanButton" destination="Y6l-XL-PgY" id="zmE-HR-8Eq"/>
+                        <outlet property="scannerView" destination="8bC-Xf-vdC" id="cdH-vi-aqo"/>
+                        <segue destination="y7f-MW-Ihs" kind="show" identifier="detailSegue" destinationCreationSelector="detailSegue" id="4UG-KE-yNH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-197" y="70"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="IgS-bE-miI">
+            <objects>
+                <viewController id="y7f-MW-Ihs" customClass="DetailViewController" customModule="Gist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XVT-rV-Klz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuC-G8-hJp" userLabel="detailLabel">
+                                <rect key="frame" x="186" y="410.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Hme-pY-dmk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uuC-G8-hJp" firstAttribute="centerY" secondItem="XVT-rV-Klz" secondAttribute="centerY" id="bBZ-Zq-TjM"/>
+                            <constraint firstItem="uuC-G8-hJp" firstAttribute="centerX" secondItem="XVT-rV-Klz" secondAttribute="centerX" id="it7-Mq-xu8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Lgp-vx-keH"/>
+                    <connections>
+                        <outlet property="detailLabel" destination="uuC-G8-hJp" id="0IW-mp-0sO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h2M-k5-fw4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="546" y="70"/>
         </scene>
     </scenes>
     <resources>

@@ -13,42 +13,12 @@ class DetailViewController : UIViewController {
     @IBOutlet weak var comments: UITableView!
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var accessToken: UITextField!
-    var qrData: QRData?
     var gistID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailLabel.text = qrData?.codeString
-        UIPasteboard.general.string = detailLabel.text
-        retrieveGistComments(gistURL: detailLabel.text!)
-        showToast(message : "Text copied to clipboard")
     }
     
-    func retrieveGistComments(gistURL: String) {
-        let decoupledURL = gistURL.components(separatedBy: "/")
-        self.gistID = decoupledURL.last
-        let url = URL(string: "https://api.github.com/gists/\(self.gistID ?? "15370631fbb749e6db776f013a1ef8ad")/comments")!
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                self.handleClientError(error: error)
-                return
-            }
-            guard let httpResponse = response as? HTTPURLResponse,
-                (200...299).contains(httpResponse.statusCode) else {
-                self.handleServerError(response: response!)
-                return
-            }
-            if let mimeType = httpResponse.mimeType, mimeType == "text/html",
-                let data = data,
-                let string = String(data: data, encoding: .utf8) {
-                print(string)
-                /*DispatchQueue.main.async {
-                    self.webView.loadHTMLString(string, baseURL: url)
-                }*/
-            }
-        }
-        task.resume()
-    }
     @IBAction func sendComment(_ sender: Any) {
         self.postGistComments()
     }

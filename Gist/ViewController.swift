@@ -81,7 +81,7 @@ extension ViewController : ScannerViewDelegate {
 extension ViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailSegue", let viewController = segue.destination as? DetailViewController {
+        if segue.identifier == "detailSegue", let viewController = segue.destination as? TableViewController {
             viewController.qrData = self.qrData
         }
     }

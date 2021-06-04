@@ -8,19 +8,48 @@
 import Foundation
 import UIKit
 
-class TableViewCell : UITableViewCell {
-    
+public struct GistComment: Codable {
+
+    public var id: Int
+    public var nodeId: String
+    public var url: String
+    /** The comment text. */
+    public var body: String
+    public var createdAt: Date
+    public var updatedAt: Date
+
+    public init(id: Int, nodeId: String, url: String, body: String, createdAt: Date, updatedAt: Date) {
+        self.id = id
+        self.nodeId = nodeId
+        self.url = url
+        self.body = body
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case nodeId = "node_id"
+        case url
+        case body
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+
 }
 
 class TableViewController : UITableViewController {
-    
-    var comments = []()
+    var comments = ["ABC", "DEF"]
     var qrData: QRData?
     var gistID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        retrieveGistComments(gistURL: qrData?.codeString)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.retrieveGistComments(gistURL: (qrData?.codeString)!)
+        self.tableView.reloadData()
     }
     
     func retrieveGistComments(gistURL: String) {
@@ -40,7 +69,8 @@ class TableViewController : UITableViewController {
             if let mimeType = httpResponse.mimeType, mimeType == "application/json",
                 let data = data,
                 let string = String(data: data, encoding: .utf8) {
-                comments.append(string)
+                self.comments = try JSONDecoder.decode([GistComment].self, from: string)
+                return
             }
         }
         task.resume()
@@ -56,28 +86,30 @@ class TableViewController : UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Table cells are reused and should be dequeued using a cell identifier.
-        let cellIdentifier = "TableViewCell"
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
-                                                       for: indexPath) as? TableViewCell else {
-                                                        fatalError("The dequeued cell is not an instance of MealTableViewCell.")
-        }
-
         // Fetches the appropriate meal for the data source layout.
         let comment = comments[indexPath.row]
-        
-        cell.textLabel?.text = comment.body
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
+        cell.textLabel?.text = comment
         return cell
     }
     
-    extension TableViewController {
-        
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "submitSegue", let viewController = segue.destination as? DetailViewController {
-                viewController.gistID = self.gistID
-            }
-        }
-        
+    func handleClientError(error: Error) {
+        print(error)
     }
+    
+    func handleServerError(response: URLResponse) {
+        print(response)
+    }
+    
+}
+
+
+extension TableViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "submitSegue", let viewController = segue.destination as? DetailViewController {
+            viewController.gistID = self.gistID
+        }
+    }
+    
 }

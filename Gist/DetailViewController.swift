@@ -18,12 +18,13 @@ class DetailViewController : UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         comment.layer.cornerRadius = 5
-        comment.layer.borderColor = UIColor.blue.cgColor
+        comment.layer.borderColor = UIColor.cyan.cgColor
         comment.layer.borderWidth = 1
     }
     
     @IBAction func sendComment(_ sender: Any) {
         self.postGistComments()
+        self.dismiss(animated: true, completion: nil)
     }
     
     func postGistComments() {
@@ -36,9 +37,10 @@ class DetailViewController : UIViewController {
         } catch let error {
             print(error.localizedDescription)
         }
+        let token = accessToken.text!.isEmpty ? ProcessInfo.processInfo.environment["accessToken"] : accessToken.text
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("Bearer \(accessToken.text ?? "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")", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(token!)", forHTTPHeaderField: "Authorization")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 self.handleClientError(error: error)
@@ -49,10 +51,11 @@ class DetailViewController : UIViewController {
                 self.handleServerError(response: response!)
                 return
             }
-            /*if let mimeType = httpResponse.mimeType, mimeType == "text/html",
+            if let mimeType = httpResponse.mimeType, mimeType == "text/html",
                 let data = data,
                 let string = String(data: data, encoding: .utf8) {
-            }*/
+                print(string)
+            }
         }
         task.resume()
     }

@@ -22,11 +22,13 @@ class TableViewController : UITableViewController {
         self.retrieveGistComments(gistURL: (qrData?.codeString)!)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.navigationController?.setToolbarHidden(true, animated:true)
-        
+        self.tableView.dataSource = self        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.retrieveGistComments(gistURL: (qrData?.codeString)!)
+    }
+        
     func retrieveGistComments(gistURL: String) {
         let decoupledURL = gistURL.components(separatedBy: "/")
         self.gistID = decoupledURL.last

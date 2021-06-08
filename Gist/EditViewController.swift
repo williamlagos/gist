@@ -7,7 +7,7 @@
 import UIKit
 import Foundation
 
-class DetailViewController : UIViewController {
+class EditViewController : UIViewController {
     
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var comment: UITextView!

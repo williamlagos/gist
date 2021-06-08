@@ -12,19 +12,13 @@ struct QRData {
     var codeString: String?
 }
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     @IBOutlet weak var scannerView: ScannerView! {
         didSet {
             scannerView.delegate = self
         }
     }
-    
-//    @IBOutlet weak var scanButton: UIButton! {
-//        didSet {
-//            scanButton.setTitle("STOP", for: .normal)
-//        }
-//    }
     
     var qrData: QRData? = nil {
         didSet {
@@ -61,7 +55,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController : ScannerViewDelegate {
+extension MainViewController : ScannerViewDelegate {
     
     func scanningDidStop() {
 //        let buttonTitle = scannerView.isRunning ? "STOP" : "SCAN"
@@ -79,7 +73,7 @@ extension ViewController : ScannerViewDelegate {
     
 }
 
-extension ViewController {
+extension MainViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailSegue", let viewController = segue.destination as? TableViewController {
@@ -87,16 +81,4 @@ extension ViewController {
         }
     }
     
-}
-
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-       let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-       tap.cancelsTouchesInView = false
-       view.addGestureRecognizer(tap)
-    }
-   
-    @objc func dismissKeyboard() {
-       view.endEditing(true)
-    }
 }

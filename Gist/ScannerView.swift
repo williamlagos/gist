@@ -73,7 +73,6 @@ extension ScannerView {
         if (captureSession?.canAddInput(videoInput) ?? false) {
             captureSession?.addInput(videoInput)
         } else {
-//            scanningDidFail()
             return
         }
         
@@ -85,7 +84,6 @@ extension ScannerView {
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr, .ean8, .ean13, .pdf417]
         } else {
-//            scanningDidFail()
             return
         }
         

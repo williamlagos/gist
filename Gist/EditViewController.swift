@@ -23,20 +23,24 @@ class EditViewController : UIViewController {
     }
     
     @IBAction func sendComment(_ sender: Any) {
+        // When clicked, trigger the API and dismiss the dialog.
         self.postGistComments()
         self.dismiss(animated: true, completion: nil)
     }
     
     func postGistComments() {
+        // This function send a new comment to a specific gist by its ID
         let url = URL(string: "https://api.github.com/gists/\(self.gistID ?? "15370631fbb749e6db776f013a1ef8ad")/comments")!
         var request = URLRequest(url: url)
         let parameters = ["body": comment.text ]
         request.httpMethod = "POST"
         do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+            // Pass dictionary to nsdata object and set it as request body
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch let error {
             print(error.localizedDescription)
         }
+        // Checks for the accessToken. If empty, accessToken can be inserted into XCode env variables.
         let token = accessToken.text!.isEmpty ? ProcessInfo.processInfo.environment["accessToken"] : accessToken.text
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -61,10 +65,12 @@ class EditViewController : UIViewController {
     }
     
     func handleClientError(error: Error) {
+        // Simple client error handling, for debugging purposes.
         print(error)
     }
     
     func handleServerError(response: URLResponse) {
+        // Simple server error handling, for debugging purposes.
         print(response)
     }
     

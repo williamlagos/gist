@@ -30,6 +30,7 @@ class TableViewController : UITableViewController {
     }
         
     func retrieveGistComments(gistURL: String) {
+        // This function requests a given list of comments by Gist ID
         let decoupledURL = gistURL.components(separatedBy: "/")
         self.gistID = decoupledURL.last
         let url = URL(string: "https://api.github.com/gists/\(self.gistID ?? "15370631fbb749e6db776f013a1ef8ad")/comments")!
@@ -63,11 +64,12 @@ class TableViewController : UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // Returns the default number of sections, in this case, just one.
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // Override function for returning the number of rows.
         return comments.count
     }
 
@@ -80,10 +82,12 @@ class TableViewController : UITableViewController {
     }
     
     func handleClientError(error: Error) {
+        // Simple client error handling, for debugging purposes.
         print(error)
     }
     
     func handleServerError(response: URLResponse) {
+        // Simple server error handling, for debugging purposes.
         print(response)
     }
     
@@ -93,6 +97,7 @@ class TableViewController : UITableViewController {
 extension TableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Function for sending the gistID data to another viewController.
         if segue.identifier == "submitSegue", let viewController = segue.destination as? EditViewController {
             viewController.gistID = self.gistID
         }

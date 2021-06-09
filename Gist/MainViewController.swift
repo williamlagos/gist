@@ -30,7 +30,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,26 +46,20 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func scanButtonAction(_ sender: UIButton) {
-        scannerView.isRunning ? scannerView.stopScanning() : scannerView.startScanning()
-        let buttonTitle = scannerView.isRunning ? "STOP" : "SCAN"
-        sender.setTitle(buttonTitle, for: .normal)
-    }
-    
 }
 
 extension MainViewController : ScannerViewDelegate {
     
     func scanningDidStop() {
-//        let buttonTitle = scannerView.isRunning ? "STOP" : "SCAN"
-//        scanButton.setTitle(buttonTitle, for: .normal)
+        // Stub for the stopped scanning.
     }
     
     func scanningDidFail() {
-        
+        // Stub for the failed scanning.
     }
     
     func scanningSucceededWithCode(_ str: String?) {
+        // When scanning successful, pass the QRData codeString.
         self.qrData = QRData(codeString: str)
         performSegue(withIdentifier: "detailSegue", sender: nil)
     }
@@ -76,6 +69,7 @@ extension MainViewController : ScannerViewDelegate {
 extension MainViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Function for sending the qrData to the next ViewController.
         if segue.identifier == "detailSegue", let viewController = segue.destination as? TableViewController {
             viewController.qrData = self.qrData
         }
